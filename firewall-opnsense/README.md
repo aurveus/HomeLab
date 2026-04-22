@@ -66,8 +66,6 @@ The firewall acts as a gateway between the internal lab network (LAN) and extern
 - Subnet: `/24`  
 - DHCP disabled  
 
-![LAN Config](lan-config.png)
-
 ---
 
 ### 4.6 Web Interface Access
