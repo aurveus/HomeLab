@@ -40,8 +40,6 @@ The firewall acts as a gateway between the internal lab network (LAN) and extern
 - Adapter 1 (WAN): NAT  
 - Adapter 2 (LAN): Internal Network (intnet)  
 
-![Network Configuration](network-config.png)
-
 ---
 
 ### 4.3 Installation
