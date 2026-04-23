@@ -65,8 +65,6 @@ A custom Suricata rule was written to detect SYN stealth scans based on:
 - High frequency (threshold-based detection)  
 - Target: Firewall (10.200.200.254)  
 
-The rule triggers an alert when scanning behavior is detected.
-
 ![Custom Rule](customnmap.png)
 
 ---
@@ -85,7 +83,71 @@ FileZilla was used to establish an SFTP connection to the OPNsense firewall.
 
 ## 8. Hosting Rule Files
 
-A Python HTTP server was used to serve the rule file so OPNsense could download it dynamically.
+A simple HTTP server was used on the Kali machine to host the custom rule file so that OPNsense could retrieve it.
 
-```bash
-python3 -m http.server 80
+![HTTP Server](server.png)
+
+---
+
+## 9. Rule Activation
+
+Within OPNsense:
+
+- Custom ruleset was enabled  
+- Rules were downloaded and updated  
+- Rule became visible in the rules section  
+
+---
+
+## 10. Attack Simulation (Nmap Scan)
+
+A SYN stealth scan was executed from the Kali machine targeting the firewall.
+
+![Nmap Scan](scan.png)
+
+---
+
+## 11. Detection Results
+
+The IDS successfully detected the scan and generated alerts.
+
+- Multiple alerts triggered  
+- Source identified as Kali machine  
+- Destination: OPNsense firewall  
+- Classification: Attempted Reconnaissance  
+
+![Alerts](alerts.png)
+
+---
+
+## 12. Key Learnings
+
+- IDS detects suspicious activity based on predefined signatures  
+- IPS can extend this by actively blocking traffic  
+- Rule accuracy is critical; incorrect syntax prevents detection  
+- Network path and interface selection directly impact visibility  
+- Custom rules provide flexibility beyond default rule sets  
+- Hosting and ingestion of rules requires proper integration between systems  
+
+---
+
+## 13. Challenges Encountered
+
+- Rule did not trigger initially due to incorrect syntax  
+- File naming mismatch prevented rule download  
+- IDS visibility depends on correct interface and traffic flow  
+- Understanding Suricata rule structure was essential  
+
+---
+
+## 14. Conclusion
+
+This lab successfully demonstrated the deployment and validation of a custom IDS rule within OPNsense. By simulating reconnaissance activity, the effectiveness of signature-based detection was confirmed. The exercise highlights the importance of correct configuration, rule accuracy, and traffic visibility in network security monitoring.
+
+---
+
+## 15. Next Steps
+
+Future work will focus on expanding the lab with additional network security controls, including web filtering and proxy configuration. These will build on the current IDS/IPS setup to provide greater visibility and control over network traffic.
+
+---
