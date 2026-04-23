@@ -97,6 +97,8 @@ Within OPNsense:
 - Rules were downloaded and updated  
 - Rule became visible in the rules section  
 
+![Ruleset Enabled](ruleenabled.png)
+
 ---
 
 ## 10. Attack Simulation (Nmap Scan)
