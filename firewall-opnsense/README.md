@@ -115,7 +115,6 @@ This demonstrates basic system recovery and administrative access restoration.
 - Add IDS/IPS features  
 - Integrate logging and monitoring  
 
----
 
 ## 9. Conclusion
 
