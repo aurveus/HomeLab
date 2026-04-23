@@ -1,12 +1,10 @@
 # OPNsense Firewall Deployment (VirtualBox)
 
----
 
 ## 1. Overview
 
 This project documents the deployment and configuration of an OPNsense firewall within a virtual lab environment. The firewall is used to simulate network segmentation and control traffic between internal and external networks.
 
----
 
 ## 2. Objectives
 
@@ -16,7 +14,6 @@ This project documents the deployment and configuration of an OPNsense firewall 
 - Enable NAT-based connectivity  
 - Access firewall via web interface  
 
----
 
 ## 3. Architecture
 
@@ -24,7 +21,6 @@ This project documents the deployment and configuration of an OPNsense firewall 
 
 The firewall acts as a gateway between the internal lab network (LAN) and external network (WAN).
 
----
 
 ## 4. Implementation
 
@@ -33,14 +29,12 @@ The firewall acts as a gateway between the internal lab network (LAN) and extern
 - Created VM using BSD / FreeBSD (64-bit)  
 - Allocated 2 GB RAM and 8 GB disk  
 
----
 
 ### 4.2 Network Configuration
 
 - Adapter 1 (WAN): NAT  
 - Adapter 2 (LAN): Internal Network (intnet)  
 
----
 
 ### 4.3 Installation
 
@@ -49,7 +43,6 @@ The firewall acts as a gateway between the internal lab network (LAN) and extern
 - Set root password  
 - Removed ISO and rebooted  
 
----
 
 ### 4.4 Interface Assignment
 
@@ -58,7 +51,6 @@ The firewall acts as a gateway between the internal lab network (LAN) and extern
 
 ![Interfaces](interfaces.png)
 
----
 
 ### 4.5 LAN Configuration
 
@@ -66,7 +58,6 @@ The firewall acts as a gateway between the internal lab network (LAN) and extern
 - Subnet: `/24`  
 - DHCP disabled  
 
----
 
 ### 4.6 Web Interface Access
 
@@ -76,7 +67,6 @@ https://10.200.200.254
 
 ![Dashboard](dashboard.png)
 
----
 
 ## 5. Password Recovery (Troubleshooting)
 
@@ -100,7 +90,6 @@ This demonstrates basic system recovery and administrative access restoration.
 
 ![Password Reset](password-reset.png)
 
----
 
 ## 6. Validation
 
@@ -109,7 +98,6 @@ This demonstrates basic system recovery and administrative access restoration.
 - Internal network configured successfully  
 - Interfaces correctly assigned  
 
----
 
 ## 7. Key Learnings
 
@@ -119,7 +107,6 @@ This demonstrates basic system recovery and administrative access restoration.
 - Virtual environments can simulate enterprise networks  
 - Basic system recovery is essential for administration  
 
----
 
 ## 8. Future Improvements
 
