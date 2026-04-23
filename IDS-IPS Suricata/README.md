@@ -40,7 +40,7 @@ IDS/IPS was enabled through the OPNsense interface with the following key settin
 - Interface: LAN  
 - Home Network: 10.200.200.0/24  
 
-![IDS Settings](ids settings.png)
+![IDS Settings](ids-settings.png)
 
 ---
 
