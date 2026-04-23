@@ -4,7 +4,6 @@
 
 This lab demonstrates the implementation of an Intrusion Detection and Prevention System (IDS/IPS) using OPNsense. A custom Suricata rule was created to detect Nmap SYN stealth scans targeting the firewall. The lab validates detection by generating scan traffic from a Kali Linux machine and observing alerts within OPNsense.
 
----
 
 ## 2. Objectives
 
@@ -16,7 +15,6 @@ This lab demonstrates the implementation of an Intrusion Detection and Preventio
 - Simulate reconnaissance activity using Nmap  
 - Validate detection through IDS alerts  
 
----
 
 ## 3. Lab Architecture Summary
 
@@ -26,7 +24,6 @@ This lab demonstrates the implementation of an Intrusion Detection and Preventio
 - **Rule Hosting:** Python HTTP server on Kali  
 - **File Transfer:** SFTP using FileZilla  
 
----
 
 ## 4. IDS/IPS Configuration
 
@@ -42,7 +39,6 @@ IDS/IPS was enabled through the OPNsense interface with the following key settin
 
 ![IDS Settings](ids-settings.png)
 
----
 
 ## 5. Enabling SSH Access
 
@@ -55,7 +51,6 @@ SSH access was enabled to allow remote file transfer and system interaction.
 
 ![SSH Configuration](ssh.png)
 
----
 
 ## 6. Custom Rule Creation
 
@@ -67,7 +62,6 @@ A custom Suricata rule was written to detect SYN stealth scans based on:
 
 ![Custom Rule](customnmaprule.png)
 
----
 
 ## 7. Rule Deployment via FileZilla
 
@@ -79,7 +73,6 @@ FileZilla was used to establish an SFTP connection to the OPNsense firewall.
 
 ![File Transfer](filezilla.png)
 
----
 
 ## 8. Hosting Rule Files
 
@@ -87,7 +80,6 @@ A simple HTTP server was used on the Kali machine to host the custom rule file s
 
 ![HTTP Server](server.png)
 
----
 
 ## 9. Rule Activation
 
@@ -99,7 +91,6 @@ Within OPNsense:
 
 ![Ruleset Enabled](ruleenabled.png)
 
----
 
 ## 10. Attack Simulation (Nmap Scan)
 
@@ -107,7 +98,6 @@ A SYN stealth scan was executed from the Kali machine targeting the firewall.
 
 ![Nmap Scan](scan.png)
 
----
 
 ## 11. Detection Results
 
@@ -120,7 +110,6 @@ The IDS successfully detected the scan and generated alerts.
 
 ![Alerts](alerts.png)
 
----
 
 ## 12. Key Learnings
 
@@ -140,13 +129,11 @@ The IDS successfully detected the scan and generated alerts.
 - IDS visibility depends on correct interface and traffic flow  
 - Understanding Suricata rule structure was essential  
 
----
 
 ## 14. Conclusion
 
 This lab successfully demonstrated the deployment and validation of a custom IDS rule within OPNsense. By simulating reconnaissance activity, the effectiveness of signature-based detection was confirmed. The exercise highlights the importance of correct configuration, rule accuracy, and traffic visibility in network security monitoring.
 
----
 
 ## 15. Next Steps
 
