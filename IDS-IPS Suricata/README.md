@@ -65,7 +65,7 @@ A custom Suricata rule was written to detect SYN stealth scans based on:
 - High frequency (threshold-based detection)  
 - Target: Firewall (10.200.200.254)  
 
-![Custom Rule](customnmap.png)
+![Custom Rule](customnmaprule.png)
 
 ---
 
