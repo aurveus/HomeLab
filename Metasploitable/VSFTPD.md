@@ -112,7 +112,7 @@ Then the exploit was searched:
 search vsftpd
 ```
 
-![Metasploit Search](./msfconsole1.PNG)
+![Metasploit Search](./msfconsole1.png)
 
 The correct module was selected and configured:
 
@@ -122,7 +122,7 @@ set RHOST 10.200.200.50
 run
 ```
 
-![Exploit Execution](./RCE.PNG)
+![Exploit Execution](./RCE.png)
 
 ## What Happened During the Exploit
 
