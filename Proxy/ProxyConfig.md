@@ -177,7 +177,7 @@ While HTTPS filtering showed limitations, the system behaves consistently with r
 
 ## Future Work
 
-- OPNSense multi-wan failover and load balancing
+- Wazuh Deployment and Agents
 
 ## Notes
 
