@@ -128,7 +128,7 @@ run
 
 The exploit did not “log in” normally. Instead, it triggered a hidden backdoor in the FTP service.
 
-Behind the scenes:
+Exploit Explanation:
 
 - A specially crafted login request is sent to the FTP server
 - The backdoor is triggered silently
@@ -172,6 +172,8 @@ nmap -p 6200 10.200.200.254
 ```
 
 The alert was triggered successfully.
+
+![VSFTPD Exploit Alert](./vsftpd-alert.png)
 
 This confirms that:
 - The rule works
