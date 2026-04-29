@@ -1,203 +1,145 @@
-# Wazuh Deployment and Agent Integration Lab
+# Wazuh SIEM Deployment and Agent Integration
 
-## 1. Wazuh Deployment
+## 1. Overview
 
-Wazuh was deployed as the centralized SIEM platform within the internal lab network.
+This lab focused on deploying a functional Wazuh SIEM environment and integrating multiple endpoints into a centralized monitoring system.
 
-### Access
+The objective was to:
+- Establish a working SIEM platform
+- Configure reliable static networking across systems
+- Integrate heterogeneous endpoints (Windows and Ubuntu)
+- Validate centralized visibility of agents and system activity
+
+This lab forms the foundation for future attack simulation and detection exercises.
+
+
+## 2. Wazuh Deployment
+
+Wazuh was successfully deployed as the central monitoring platform within the lab environment.
+
+The dashboard was accessed via:
 ```
 https://10.200.200.20
 ```
 
-### Notes
-- HTTPS is required to access the dashboard
-- A self-signed certificate warning must be accepted
+The deployment included:
+- Wazuh Manager (log collection and analysis)
+- Wazuh Indexer (data storage and search)
+- Wazuh Dashboard (visualization and management)
 
-### Core Components
-- Wazuh Manager
-- Wazuh Indexer
-- Wazuh Dashboard
+HTTPS was required for access, and a self-signed certificate warning was expected and accepted.
 
----
 
-## 2. Wazuh Dashboard
+## 3. Network Design and Configuration
 
-The Wazuh dashboard provides centralized visibility into monitored systems, alerts, and security events.
+A fully static IP-based network was implemented to ensure predictability and control.
 
-![Wazuh Dashboard](./wazuh-dashboard.png)
-
----
-
-## 3. Network Configuration
-
-All systems were configured using static IP addressing within the same subnet.
-
-### Network Details
+### Network Configuration
 ```
 Network: 10.200.200.0/24
 Gateway: 10.200.200.254
 DNS:     10.200.200.254
 ```
 
-### Assigned IPs
+### Assigned Hosts
 ```
 Wazuh   → 10.200.200.20
 Windows → 10.200.200.30
 Ubuntu  → 10.200.200.40
 ```
 
----
+All systems were connected through an internal network, with routing handled by OPNsense. Static addressing removed reliance on DHCP and ensured consistent endpoint identification.
 
-## 4. Ubuntu Static IP Configuration
 
-Ubuntu Server uses **netplan** for network configuration.
+## 4. Ubuntu Static IP Implementation
 
-### Configuration File
-```
-/etc/netplan/00-installer-config.yaml
-```
+Ubuntu Server was configured using netplan, which required careful handling due to its YAML-based structure.
 
-### Static IP Configuration
-```yaml
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    enp0s3:
-      dhcp4: no
-    enp0s8:
-      dhcp4: no
-      addresses:
-        - 10.200.200.40/24
-      routes:
-        - to: default
-          via: 10.200.200.254
-      nameservers:
-        addresses: [10.200.200.254]
-```
-
-### Apply Configuration
-```
-sudo netplan apply
-```
-
-### Important Fixes
+Key actions taken:
 - Disabled DHCP on all interfaces
-- Disabled cloud-init to prevent configuration override
-- Removed conflicting netplan files
-- Ensured correct YAML indentation
+- Assigned a static IP to the internal network interface
+- Configured gateway and DNS to route through the firewall
 
----
+An issue was encountered where the IP configuration reset after reboot. This was traced to cloud-init overriding manual network settings.
 
-## 5. Windows Agent Deployment
+Resolution involved:
+- Disabling cloud-init network configuration
+- Removing conflicting netplan files
+- Applying a clean and correctly formatted YAML configuration
 
-### Steps
-1. Open Wazuh Dashboard  
-2. Navigate to:
-```
-Agents → Deploy new agent
-```
-3. Select OS: Windows  
-4. Copy the generated PowerShell command  
-5. Run the command in **PowerShell (Administrator)** on the Windows VM  
+This ensured persistence of the static IP configuration across reboots.
 
-### Result
-- Agent installs and registers automatically  
-- Appears in Wazuh dashboard as **Active**  
 
----
+## 5. Agent Integration
 
-## 6. Ubuntu Agent Deployment
+### Windows Agent
 
-### Package Selection
-- OS: Linux  
-- Package: DEB (amd64)  
+The Windows endpoint was integrated using the Wazuh deployment interface. A generated PowerShell command was executed on the host, enabling automatic registration with the Wazuh server.
 
-### Installation Steps
-1. Navigate to:
-```
-Agents → Deploy new agent
-```
-2. Copy the Linux (bash) installation command  
-3. Execute on Ubuntu:
-```
-sudo <installation_command>
-```
+The process was straightforward and required minimal manual configuration. The agent successfully appeared as active within the dashboard.
 
-### Start and Enable Agent
-```
-sudo systemctl start wazuh-agent
-sudo systemctl enable wazuh-agent
-```
+### Ubuntu Agent
 
-### Verification
-```
-systemctl status wazuh-agent
-```
+The Ubuntu agent was deployed using the Linux DEB (amd64) package.
 
-### Result
-- Ubuntu agent successfully connects to Wazuh  
-- Agent appears as **Active** in the dashboard  
+Observations:
+- Installation required execution via terminal or SSH
+- Manual service management was required to start and enable the agent
+- Stable network configuration was critical for successful connection
 
----
+Once configured, the Ubuntu system successfully registered and appeared as active within Wazuh.
 
-## 7. Agent Verification
 
-The following screenshot confirms that both Windows and Ubuntu agents are successfully deployed and active.
+## 6. Verification
 
+Successful deployment was confirmed through:
+- Active agent status in the Wazuh dashboard
+- Consistent connectivity across all systems
+- Proper communication between endpoints and the SIEM
+
+### Dashboard View
+![Wazuh Dashboard](./wazuh-dashboard.png)
+
+### Agent Status
 ![Wazuh Agents](./agents.png)
 
----
 
-## 8. Connectivity Verification
+## 7. Key Lessons Learned
 
-### Test Gateway
-```
-ping 10.200.200.254
-```
+### Network Stability is Critical
+Static IP addressing is essential in controlled lab environments. Misconfiguration leads to inconsistent connectivity and failed integrations.
 
-### Test Wazuh Server
-```
-ping 10.200.200.20
-```
+### Hidden System Services Can Override Configuration
+Cloud-init demonstrated how underlying services can override manual configurations, emphasizing the need to understand system-level behavior.
 
----
+### YAML Configuration Requires Precision
+Netplan configuration is highly sensitive to formatting. Incorrect indentation can invalidate the configuration without clear errors.
 
-## 9. Key Issues and Fixes
+### Resource Management Matters
+Running multiple virtual machines simultaneously highlighted the importance of balancing CPU and memory allocation to maintain stability.
 
-### Ubuntu IP Reset After Reboot
-- Cause: cloud-init overriding netplan  
-- Fix:
-  - Disabled cloud-init networking  
-  - Removed conflicting netplan files  
-  - Re-applied netplan configuration  
+### Centralized Monitoring Provides Visibility
+Integrating multiple endpoints into Wazuh demonstrated the effectiveness of centralized logging and monitoring for detecting and analyzing system activity.
 
-### Wazuh Dashboard Not Accessible
-- Cause: Using HTTP instead of HTTPS  
-- Fix:
-```
-https://10.200.200.20
-```
 
-### Multiple IP Addresses on Wazuh
-- Cause: DHCP client still active  
-- Fix:
-- Disabled DHCP configuration  
-- Removed dhclient persistence  
-- Restarted network services  
+## 8. Next Steps
 
-### Agent Not Connecting
-- Cause: Service not started or network misconfiguration  
-- Fix:
-```
-sudo systemctl start wazuh-agent
-```
+With the SIEM environment fully operational, the next phase will focus on:
+- Introducing a vulnerable target machine (e.g., Metasploitable)
+- Performing controlled attacks from Kali Linux
+- Observing and analyzing generated logs in Wazuh
+- Validating detection capabilities and alert generation
 
----
+This will transition the lab from deployment to active security testing and analysis.
 
-## 10. Outcome
 
-- Wazuh successfully deployed and accessible  
-- Static IP addressing implemented across all systems  
-- Windows and Ubuntu machines integrated as monitored agents  
-- Centralized logging and monitoring operational  
+## 9. Conclusion
+
+The lab successfully established a working Wazuh SIEM environment with integrated Windows and Ubuntu agents.
+
+Key outcomes:
+- Reliable static network configuration
+- Successful multi-platform agent integration
+- Functional centralized monitoring system
+
+This setup provides a strong foundation for further work in attack simulation, threat detection, and security analysis.
