@@ -112,7 +112,7 @@ Then the exploit was searched:
 search vsftpd
 ```
 
-![Metasploit Search](./ msfconsole1.PNG)
+![Metasploit Search](./msfconsole1.PNG)
 
 The correct module was selected and configured:
 
