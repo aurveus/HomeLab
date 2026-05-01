@@ -32,6 +32,7 @@ This vulnerability occurs because the application allows user-controlled file pa
 
 A malicious PHP file containing a system command execution function was uploaded through the file upload feature.
 
+![Shell PHP](shellphp.png)
 ![File Upload Process](fileuploading.png)  
 ![Web Shell Execution](fileuploaded.png)
 
