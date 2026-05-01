@@ -18,7 +18,7 @@ The Metasploit Framework was used to exploit this backdoor via the module `explo
 
 Once executed, the exploit sent a specially crafted command to the IRC service, triggering the backdoor functionality.
 
-![Exploit Execution 1](ircd-shell1.png)  
+![Exploit Execution 1](ircds-shell1.png)  
 ![Exploit Execution 2](ircd-shell2.png)
 
 ## Outcome
