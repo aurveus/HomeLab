@@ -16,7 +16,7 @@ This worked because the application directly passed user input into a system-lev
 
 SQL injection was performed by manipulating input fields to alter the structure of database queries. By using conditions that always evaluate to true, it was possible to bypass logic and retrieve database contents.
 
-![SQL Injection](sqli.png)
+![SQL Injection](SQLi.png)
 
 The vulnerability exists because user input is directly embedded into SQL queries without sanitization.
 
@@ -24,7 +24,7 @@ The vulnerability exists because user input is directly embedded into SQL querie
 
 Local File Inclusion was exploited by manipulating a URL parameter to load sensitive system files such as `/etc/passwd`.
 
-![LFI](lfi.png)
+![LFI](LFI.png)
 
 This vulnerability occurs because the application allows user-controlled file paths without proper restriction.
 
@@ -32,8 +32,8 @@ This vulnerability occurs because the application allows user-controlled file pa
 
 A malicious PHP file containing a system command execution function was uploaded through the file upload feature.
 
-![File Upload Process](file uploading.png)  
-![Web Shell Execution](file uploaded.png)
+![File Upload Process](fileuploading.png)  
+![Web Shell Execution](fileuploaded.png)
 
 After uploading, the file was accessed through the browser and used to execute system commands via URL parameters. This effectively created a persistent backdoor on the system.
 
