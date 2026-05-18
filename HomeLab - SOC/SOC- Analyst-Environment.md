@@ -107,7 +107,7 @@ Write-Host "Malicious PowerShell Executed"
 
 The purpose of this step was not to create actual malware, but to simulate attacker-style PowerShell execution and generate telemetry that could later be investigated inside Splunk.
 
-![Payload Folder](payloadfolder.png)
+![Payload Folder](payloadsfolderandfile.png)
 
 ## Hosting the Payload and Executing it on Windows
 
@@ -149,7 +149,7 @@ The logs generated from the PowerShell execution were successfully visible insid
 - Splunk ingestion was functioning correctly
 - suspicious activity could be investigated through SPL searches
 
-![Splunk Detection Logs](splunklog.png)
+![Splunk Detection Logs](splunklogged.png)
 
 ## Key Lessons Learned
 
